@@ -15,6 +15,8 @@ for row in cdf.itertuples():
 
 cdf['Date/Time'] = dts
 
+print(cdf)
+
 report = 'equity_curve_1H_grey.xlsx'
 trades = 'Trades List'
 cols = [ 0, 1, 2, 7 ]
@@ -28,7 +30,6 @@ rows = [ ]
 for row in tdf.itertuples():
     rowdict = { }
     if row.Index == 0:
-
         continue
 
     if row.Type == 'Buy':
@@ -55,8 +56,8 @@ for row in tdf.itertuples():
     rows.append(rowdict);
 
 # create an empyt equity curve DataFrame
-ecols = ['Position Id', 'Date/Time', 'Order Type',
-         'Profit/Loss', 'Cumulative P/L']
+#ecols = ['Position Id', 'Date/Time', 'Order Type',
+#         'Profit/Loss', 'Cumulative P/L']
 edf = df(rows)
 
 #fig = px.line(edf, x='Date/Time', y='Cumulative P/L', title="Equity Curve");

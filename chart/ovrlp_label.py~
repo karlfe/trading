@@ -1,0 +1,33 @@
+import pandas as pd
+from datetime import datetime
+import matplotlib.pyplot as plt
+import mplfinance as fplt
+import pandas as pd
+from datetime import datetime as dt
+import matplotlib.dates as mpdates
+
+plt.ion()
+dts = [ ]
+cdf = pd.read_csv('chart1.csv')
+#cdf = pd.read_csv('market_1H_grey.csv')
+for row in cdf.itertuples():
+    rdt = row.Date + ' ' + row.Time
+    dtm = dt.strptime(rdt, "%m/%d/%Y %H:%M")
+    dts.append(dtm)
+
+cols = ['Open','High','Low','Close']
+df = cdf[cols]
+
+dti = pd.DatetimeIndex(dts)
+df.set_index(dti, inplace=True) 
+
+print(df)
+
+fplt.plot(df[0:5], type='candle', style='charles',
+          title='Ovelapping Labelling',
+          ylabel='Price ($)')
+
+#plt.show(block=False)
+#plt.pause(0.001)
+input("Overlapping?");
+plt.close('all')
